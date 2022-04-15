@@ -1,0 +1,31 @@
+.button{
+  border: 1px solid #4C3DB2;
+  display: flex;
+  width: 150px;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+/* .button:hover{
+  background-color: #4C3DB2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+} */
+
+.button-center{
+  display: flex;
+  font-size: 12px;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  color: #4C3DB2;
+}
+/* .button-center:hover{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+} */

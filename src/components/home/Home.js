@@ -3,47 +3,78 @@ import HOMEIMAGE from "../../../public/assets/banner.svg";
 import "./Home.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Book from "../book/Book";
 export default function Home() {
+  // const filterArr = data.filter(data.category == 'Education')
   const [data, setData] = useState([{}]);
+  const menuCategories = [{
+    label: 'Business',
+    value: 'Business',
+  },
+  {
+    label: 'Education',
+    value: 'Education',
+  },
+  {
+    label: 'Food & Drink',
+    value: 'Food & Drink',
+  },
+  {
+    label : 'Fiction & Poetry',
+    value: 'Fiction & Poetry',
+  },
+  {
+    label : 'Cancel',
+    value: '',
+  }
+]
+  const [selectedCategory, setSselectedCategory] = useState('');
   useEffect(() => {
     axios.get("http://localhost:3333/books").then((response) => {
       setData(response.data);
     });
-    console.log(data);
   }, []);
+  console.log(data);
 
   return (
     <div className="home">
       <img src={HOMEIMAGE} width="1120px" height="702px" />
-      <div className="home-category">
-        <h3>Categories</h3>
-        <div className="home-categories">
-          <span>Art & Fashion</span>
-          <span>Business</span>
-          <span>Food & Drink</span>
-          <span>Education</span>
-          <span>Film, TV & Drama</span>
-          <span>Biography</span>
+      <div className="home-content">
+        <div className="home-category">
+          <div className="home-categories">
+            <h3>{selectedCategory === '' ? 'Categories' : selectedCategory}</h3>
+            {menuCategories?.map(c =>{
+              return(
+                <>
+                <span onClick={() => setSselectedCategory(c.value)}>{c.label}</span>
+                </>
+              )             
+              })}
+          </div>
         </div>
-      </div>
-      <div className="star-rating">
-        <span style={{width: "50%"}}></span>
-      </div>
-      {/* <img src={data[0].image_url} alt=""/>
-      <h3>{data[0].author}</h3> */}
-      <div className="home-books">
-        {data?.map((e, index) => {
-          return (
-            <>
-              <div>
-                <img src={e.image_url} />
-                <div>
-                  <span>{e.author}</span>
-                </div>
-              </div>
-            </>
-          );
-        })}
+        <div className="home-books">
+          {
+            data?.filter((item)=>{
+              if(selectedCategory){
+              return item.category === selectedCategory
+              }
+              return true;
+            })?.map(e =>{
+              return(
+                <>
+                <Book book={e}/>
+                </>
+              );
+            })
+          }
+          {/* {data?.map((data, index) => {
+            return (
+              <>
+              <Book book={data}/>
+              </>
+            );
+          })} */}
+        </div>
       </div>
     </div>
   );

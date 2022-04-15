@@ -11,7 +11,9 @@ function Navbar() {
 
   return (
     <div className="nav-header">
-      <h2>Bookstore</h2>
+      <NavLink style={{textDecoration: 'none', color:'black'}} to="/">
+        <h2>Bookstore</h2>
+      </NavLink>
       <div className="nav-center">
         <div>
           <a
