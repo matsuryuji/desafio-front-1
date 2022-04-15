@@ -1,12 +1,10 @@
 import React from "react";
 import HOMEIMAGE from "../../../public/assets/banner.svg";
 import "./Home.css";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect, useContext } from "react";
 import Book from "../book/Book";
-export default function Home() {
-  // const filterArr = data.filter(data.category == 'Education')
-  const [data, setData] = useState([{}]);
+export default function Home({data}) {
+  // 
   const menuCategories = [{
     label: 'Business',
     value: 'Business',
@@ -29,12 +27,7 @@ export default function Home() {
   }
 ]
   const [selectedCategory, setSselectedCategory] = useState('');
-  useEffect(() => {
-    axios.get("http://localhost:3333/books").then((response) => {
-      setData(response.data);
-    });
-  }, []);
-  console.log(data);
+
 
   return (
     <div className="home">
