@@ -2,11 +2,13 @@ import React from "react";
 import "./Book.css";
 import Box from "../box/Box"
 import Button from "../button/Button";
-import { useState } from "react";
-
-export default function Book({book})
- {
-  // console.log(book)
+import { useState, useContext } from "react";
+import { CartContext } from "../cart/CartContext";
+export default function Book({book}){
+  const cart = useContext(CartContext)
+  const add = (book) => () => {
+    cart.addToCart(book)
+  }
   return (
     <div className="home-info">
       <img src={book.image_url} />
@@ -26,7 +28,7 @@ export default function Book({book})
             R${book.price}
           </span>
         </div>
-          <Button title="BUY NOW" onClick={()=> setIsClick(1)}></Button>
+          <Button title="BUY NOW" onClick={add(book)}></Button>
       </div>
     </div>
   );

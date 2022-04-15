@@ -1,14 +1,15 @@
 import "./Navbar.css";
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import USERICON from "../../../public/assets/user.svg";
 import SEARCHICON from "../../../public/assets/search.svg";
 import BAGICON from "../../../public/assets/shop bag.svg";
-
+import { CartContext } from "../cart/CartContext";
 function Navbar() {
   const [isClick, setIsClick] = useState(0);
-
+  const cart = useContext(CartContext)
+  console.log(JSON.stringify(cart,null, 2));
   return (
     <div className="nav-header">
       <NavLink style={{textDecoration: 'none', color:'black'}} to="/">
@@ -61,6 +62,7 @@ function Navbar() {
         </NavLink>
         <NavLink to="/cart">
           <img src={BAGICON} alt="user" />
+          {/* <span>{count}</span> */}
         </NavLink>
       </div>
     </div>
